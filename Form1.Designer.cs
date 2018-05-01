@@ -90,6 +90,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.shuffle = new System.Windows.Forms.CheckBox();
             this.grp_xPlotter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threads)).BeginInit();
@@ -779,11 +780,23 @@
             this.statusStrip1.TabIndex = 60;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // shuffle
+            // 
+            this.shuffle.AutoSize = true;
+            this.shuffle.Location = new System.Drawing.Point(24, 417);
+            this.shuffle.Name = "shuffle";
+            this.shuffle.Size = new System.Drawing.Size(82, 17);
+            this.shuffle.TabIndex = 61;
+            this.shuffle.Text = "Poc1>Poc2";
+            this.shuffle.UseVisualStyleBackColor = true;
+            this.shuffle.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 706);
+            this.Controls.Add(this.shuffle);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox4);
@@ -885,6 +898,7 @@
         private System.Windows.Forms.NumericUpDown snonce;
         private System.Windows.Forms.Label files;
         private System.Windows.Forms.Label plotsize;
+        private System.Windows.Forms.CheckBox shuffle;
     }
 }
 

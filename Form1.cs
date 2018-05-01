@@ -188,10 +188,10 @@ namespace XplotterGui
             drive.Value = Properties.Settings.Default.drive;
             offset.Value = Properties.Settings.Default.offset;
             ntpmax.Checked = Properties.Settings.Default.ntp;
-     
             oneFile.Checked = Properties.Settings.Default.ftp;
             moreFiles.Checked = !Properties.Settings.Default.ftp;
             npf.Value = Properties.Settings.Default.ftpvalue;
+            shuffle.Checked = Properties.Settings.Default.shuffle;
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
@@ -287,7 +287,7 @@ namespace XplotterGui
                     using (Process p1 = new Process())
                     {
                         // set start info
-                        Console.WriteLine("-id " + numericID.Text + " -sn " + (snonce.Value + tasklist[x1].start).ToString() + " -n " + tasklist[x1].len + " -t " + threads.Value.ToString() + " -mem " + ram.Value.ToString() + "G" + " -path " + ssdCache.Text);
+                        //Console.WriteLine("-id " + numericID.Text + " -sn " + (snonce.Value + tasklist[x1].start).ToString() + " -n " + tasklist[x1].len + " -t " + threads.Value.ToString() + " -mem " + ram.Value.ToString() + "G" + " -path " + ssdCache.Text);
                         p1.StartInfo = new ProcessStartInfo(xPlotter.Text, "-id "+numericID.Text+" -sn "+ (snonce.Value+tasklist[x1].start).ToString()+" -n "+tasklist[x1].len+" -t "+threads.Value.ToString() + " -mem " + ram.Value.ToString()+"G" + " -path "+ssdCache.Text)
                         {
                             WindowStyle = ProcessWindowStyle.Hidden,
@@ -361,8 +361,16 @@ namespace XplotterGui
                     using (Process p2 = new Process())
                     {
                         // set start info
-                        Console.WriteLine(ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " " + target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString() + "_" + tasklist[x2 - 1].fileLength.ToString());
-                        p2.StartInfo = new ProcessStartInfo(Application.StartupPath +"\\"+ "plotMerge.exe", ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " "+target.Text+ "\\" + numericID.Text + "_" + (snonce.Value+npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString() + "_" + tasklist[x2 - 1].fileLength.ToString())
+                        string command;
+                        if (shuffle.Checked) {
+                            command = ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " " + target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString();
+                        }
+                        else
+                        {
+                            command = ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " " + target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString() + "_" + tasklist[x2 - 1].fileLength.ToString();
+                        }
+                        //Console.WriteLine(command);
+                        p2.StartInfo = new ProcessStartInfo(Application.StartupPath +"\\"+ "plotMerge.exe", command)
                         {
                             WindowStyle = ProcessWindowStyle.Hidden,
                             //Arguments = "/A",
@@ -555,6 +563,12 @@ namespace XplotterGui
             automaticsn.Checked =true;
             manualsn.Checked = false;
             Properties.Settings.Default.start = automaticsn.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.shuffle = shuffle.Checked;
             Properties.Settings.Default.Save();
         }
     }

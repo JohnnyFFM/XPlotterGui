@@ -202,5 +202,17 @@ namespace XplotterGui.Properties {
                 this["ftpvalue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool shuffle {
+            get {
+                return ((bool)(this["shuffle"]));
+            }
+            set {
+                this["shuffle"] = value;
+            }
+        }
     }
 }
