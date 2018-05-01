@@ -5,3 +5,5 @@
 /obj/Debug
 /bin/Debug
 /.vs/XplotterGui/v15
+/bin/Release
+/obj/Release

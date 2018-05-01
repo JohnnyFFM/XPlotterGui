@@ -128,7 +128,7 @@ namespace XplotterGui
             if (Directory.Exists(ssdCache.Text)){
                 DriveInfo drive = new DriveInfo(ssdCache.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
-                space.Text = "Using " + prettyBytes(a.AvailableFreeSpace * (long)cachepct.Value / 100) + " (" + (a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18)).ToString("#,##0") + " Nonces)" + " out of " + prettyBytes(a.AvailableFreeSpace) + " (" + (a.AvailableFreeSpace / (2 << 18)).ToString("#,##0") + " Nonces)";
+                space.Text = "Using " + prettyBytes(a.AvailableFreeSpace * (long)cachepct.Value / 100) + " (" + (a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 17)).ToString("#,##0") + " Nonces)" + " out of " + prettyBytes(a.AvailableFreeSpace) + " (" + (a.AvailableFreeSpace / (2 << 17)).ToString("#,##0") + " Nonces)";
             }
         }
         private void UpdateSpace2()
@@ -137,7 +137,7 @@ namespace XplotterGui
             {
                 DriveInfo drive = new DriveInfo(target.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
-                space2.Text = prettyBytes(a.AvailableFreeSpace) + " (" + (a.AvailableFreeSpace *0.9999 / (2 << 18)).ToString("#,##0") + " Nonces)";
+                space2.Text = prettyBytes(a.AvailableFreeSpace) + " (" + (a.AvailableFreeSpace *0.9999 / (2 << 17)).ToString("#,##0") + " Nonces)";
             }
         }
         private string prettyBytes(long bytes)
@@ -179,14 +179,15 @@ namespace XplotterGui
             ram.Value = Properties.Settings.Default.ram;
             ssdCache.Text = Properties.Settings.Default.cache;
             cachepct.Value = Properties.Settings.Default.space;
+            ntpValue.Checked = !Properties.Settings.Default.ntp;
+            ntp.Value = Properties.Settings.Default.ntpvalue;
             target.Text = Properties.Settings.Default.target;
             automaticsn.Checked = Properties.Settings.Default.start;
             manualsn.Checked = !Properties.Settings.Default.start;
             drive.Value = Properties.Settings.Default.drive;
             offset.Value = Properties.Settings.Default.offset;
             ntpmax.Checked = Properties.Settings.Default.ntp;
-            ntpValue.Checked = !Properties.Settings.Default.ntp;
-            ntp.Value = Properties.Settings.Default.ntpvalue;
+     
             oneFile.Checked = Properties.Settings.Default.ftp;
             moreFiles.Checked = !Properties.Settings.Default.ftp;
             npf.Value = Properties.Settings.Default.ftpvalue;
@@ -220,10 +221,11 @@ namespace XplotterGui
                 DriveInfo drive = new DriveInfo(ssdCache.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
                 cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18));
+                Console.WriteLine(cachesize.ToString());
+                cachesize = (cachesize / 8) * 8;
+                Console.WriteLine(cachesize.ToString());
             }
             else { return; }
-
-
             x1 = 0;
             x2 = 0;
             //prepare tasklist
@@ -284,6 +286,7 @@ namespace XplotterGui
                     using (Process p1 = new Process())
                     {
                         // set start info
+                        Console.WriteLine("-id " + numericID.Text + " -sn " + (snonce.Value + tasklist[x1].start).ToString() + " -n " + tasklist[x1].len + " -t " + threads.Value.ToString() + " -mem " + ram.Value.ToString() + "G" + " -path " + ssdCache.Text);
                         p1.StartInfo = new ProcessStartInfo(xPlotter.Text, "-id "+numericID.Text+" -sn "+ (snonce.Value+tasklist[x1].start).ToString()+" -n "+tasklist[x1].len+" -t "+threads.Value.ToString() + " -mem " + ram.Value.ToString()+"G" + " -path "+ssdCache.Text)
                         {
                             WindowStyle = ProcessWindowStyle.Hidden,
@@ -357,7 +360,8 @@ namespace XplotterGui
                     using (Process p2 = new Process())
                     {
                         // set start info
-                        p2.StartInfo = new ProcessStartInfo("cmd.exe", "/A /C move "+ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " "+target.Text)
+                        Console.WriteLine(ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " " + target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString() + "_" + tasklist[x2 - 1].fileLength.ToString());
+                        p2.StartInfo = new ProcessStartInfo(Application.StartupPath +"\\"+ "plotMerge.exe", ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " "+target.Text+ "\\" + numericID.Text + "_" + (snonce.Value+npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString() + "_" + tasklist[x2 - 1].fileLength.ToString())
                         {
                             WindowStyle = ProcessWindowStyle.Hidden,
                             //Arguments = "/A",
@@ -426,7 +430,7 @@ namespace XplotterGui
         { 
             if (automaticsn.Checked)
             {
-                snonce.Value = drive.Value* offset.Value;
+                snonce.Value = (drive.Value-1)* offset.Value;
             }
         }
 
@@ -450,7 +454,7 @@ namespace XplotterGui
                 {
                 DriveInfo drive = new DriveInfo(target.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
-                ntp.Value = (decimal)((double)(a.AvailableFreeSpace / (2 << 18)) * 0.9999);
+                ntp.Value = (decimal)((double)(a.AvailableFreeSpace / (2 << 17)) * 0.9999);
                 Properties.Settings.Default.ntpvalue = ntp.Value;
                 Properties.Settings.Default.Save();
             }
@@ -504,7 +508,7 @@ namespace XplotterGui
         }
         private void displayPlotSize()
         {
-            plotsize.Text = "Total size: " + prettyBytes((long)ntp.Value * (2 << 18));
+            plotsize.Text = "Total size: " + prettyBytes((long)ntp.Value * (2 << 17));
             if (oneFile.Checked) {
                 files.Text = "1 file(s)";
                     } else {

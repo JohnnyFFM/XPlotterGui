@@ -791,6 +791,7 @@
             this.Controls.Add(this.grp_SSD);
             this.Controls.Add(this.grp_xPlotter);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Johnny\'s XPlotterGui+";
