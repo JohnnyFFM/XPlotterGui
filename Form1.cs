@@ -384,7 +384,7 @@ namespace XplotterGui
                         p2.BeginOutputReadLine();
                         p2.WaitForExit();
                         // p2.Close();
-
+                        File.Delete(ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString());
                         //start_plot(x1, x2);
                         //task2Status("Task done! Waiting for Task 1, i.e. CPU is bottleneck!");
                         x2++;
