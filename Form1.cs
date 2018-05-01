@@ -48,6 +48,7 @@ namespace XplotterGui
             }
             else
             {
+                if (textBox3.TextLength > 1000) textBox3.Clear();
                 textBox3.Text = text;
             }
             
@@ -58,8 +59,8 @@ namespace XplotterGui
             {
                 textBox4.Invoke(new MethodInvoker(() => { task2Status(text); }));
                 return;
-            } else { 
-            
+            } else {
+                if (textBox4.TextLength > 1000) textBox4.Clear();
                 textBox4.Text = text;
             }
         }
