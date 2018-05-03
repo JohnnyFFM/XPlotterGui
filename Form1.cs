@@ -48,7 +48,6 @@ namespace XplotterGui
             }
             else
             {
-                if (textBox3.TextLength > 1000) textBox3.Clear();
                 textBox3.Text = text;
             }
             
@@ -60,7 +59,6 @@ namespace XplotterGui
                 textBox4.Invoke(new MethodInvoker(() => { task2Status(text); }));
                 return;
             } else {
-                if (textBox4.TextLength > 1000) textBox4.Clear();
                 textBox4.Text = text;
             }
         }
@@ -79,7 +77,8 @@ namespace XplotterGui
             {
                 if (e.Data != null)
                 {
-                    textBox1.AppendText(e.Data+"\n");
+                    if (textBox1.Lines.Length > 50) textBox1.Text = "";
+                    textBox1.AppendText(e.Data+ "\r\n");
                 }
             }
         }
@@ -97,6 +96,7 @@ namespace XplotterGui
             {
                 if (e.Data != null)
                 {
+                    if (textBox2.Lines.Length > 50) textBox2.Text = "";
                     textBox2.AppendText(e.Data + "\n");
                 }
             }
