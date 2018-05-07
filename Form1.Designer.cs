@@ -47,15 +47,21 @@
             this.xPlotter = new System.Windows.Forms.TextBox();
             this.grp_SSD = new System.Windows.Forms.GroupBox();
             this.btn_SSD = new System.Windows.Forms.Button();
-            this.lbl_SSD2 = new System.Windows.Forms.Label();
             this.space = new System.Windows.Forms.Label();
             this.spaceLabel = new System.Windows.Forms.Label();
-            this.lbl_SSD3 = new System.Windows.Forms.Label();
-            this.cachepct = new System.Windows.Forms.NumericUpDown();
             this.ssdCache = new System.Windows.Forms.TextBox();
             this.lbl_SSD1 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.cnonces = new System.Windows.Forms.NumericUpDown();
+            this.lbl_SSD3 = new System.Windows.Forms.Label();
+            this.cachepct = new System.Windows.Forms.NumericUpDown();
+            this.cnonce = new System.Windows.Forms.RadioButton();
+            this.spct = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.files = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.modeB = new System.Windows.Forms.RadioButton();
+            this.modeA = new System.Windows.Forms.RadioButton();
             this.plotsize = new System.Windows.Forms.Label();
             this.snonce = new System.Windows.Forms.NumericUpDown();
             this.offset = new System.Windows.Forms.NumericUpDown();
@@ -91,12 +97,16 @@
             this.button1 = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.shuffle = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.grp_xPlotter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threads)).BeginInit();
             this.grp_SSD.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cnonces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cachepct)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snonce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.offset)).BeginInit();
             this.panel3.SuspendLayout();
@@ -261,16 +271,14 @@
             // grp_SSD
             // 
             this.grp_SSD.Controls.Add(this.btn_SSD);
-            this.grp_SSD.Controls.Add(this.lbl_SSD2);
             this.grp_SSD.Controls.Add(this.space);
             this.grp_SSD.Controls.Add(this.spaceLabel);
-            this.grp_SSD.Controls.Add(this.lbl_SSD3);
-            this.grp_SSD.Controls.Add(this.cachepct);
             this.grp_SSD.Controls.Add(this.ssdCache);
             this.grp_SSD.Controls.Add(this.lbl_SSD1);
+            this.grp_SSD.Controls.Add(this.panel4);
             this.grp_SSD.Location = new System.Drawing.Point(13, 123);
             this.grp_SSD.Name = "grp_SSD";
-            this.grp_SSD.Size = new System.Drawing.Size(596, 75);
+            this.grp_SSD.Size = new System.Drawing.Size(596, 102);
             this.grp_SSD.TabIndex = 2;
             this.grp_SSD.TabStop = false;
             this.grp_SSD.Text = "SSD Cache Settings";
@@ -285,19 +293,10 @@
             this.btn_SSD.UseVisualStyleBackColor = true;
             this.btn_SSD.Click += new System.EventHandler(this.updateSSD_Click);
             // 
-            // lbl_SSD2
-            // 
-            this.lbl_SSD2.AutoSize = true;
-            this.lbl_SSD2.Location = new System.Drawing.Point(320, 25);
-            this.lbl_SSD2.Name = "lbl_SSD2";
-            this.lbl_SSD2.Size = new System.Drawing.Size(70, 13);
-            this.lbl_SSD2.TabIndex = 3;
-            this.lbl_SSD2.Text = "Space to use";
-            // 
             // space
             // 
             this.space.AutoSize = true;
-            this.space.Location = new System.Drawing.Point(101, 50);
+            this.space.Location = new System.Drawing.Point(8, 74);
             this.space.Name = "space";
             this.space.Size = new System.Drawing.Size(55, 13);
             this.space.TabIndex = 7;
@@ -311,34 +310,6 @@
             this.spaceLabel.Size = new System.Drawing.Size(38, 13);
             this.spaceLabel.TabIndex = 6;
             this.spaceLabel.Text = "Usage";
-            // 
-            // lbl_SSD3
-            // 
-            this.lbl_SSD3.AutoSize = true;
-            this.lbl_SSD3.Location = new System.Drawing.Point(466, 25);
-            this.lbl_SSD3.Name = "lbl_SSD3";
-            this.lbl_SSD3.Size = new System.Drawing.Size(15, 13);
-            this.lbl_SSD3.TabIndex = 5;
-            this.lbl_SSD3.Text = "%";
-            // 
-            // cachepct
-            // 
-            this.cachepct.Location = new System.Drawing.Point(396, 23);
-            this.cachepct.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.cachepct.Name = "cachepct";
-            this.cachepct.Size = new System.Drawing.Size(64, 20);
-            this.cachepct.TabIndex = 4;
-            this.cachepct.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.cachepct.Value = new decimal(new int[] {
-            80,
-            0,
-            0,
-            0});
-            this.cachepct.ValueChanged += new System.EventHandler(this.cachepct_ValueChanged);
             // 
             // ssdCache
             // 
@@ -357,9 +328,95 @@
             this.lbl_SSD1.TabIndex = 0;
             this.lbl_SSD1.Text = "Location";
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.cnonces);
+            this.panel4.Controls.Add(this.lbl_SSD3);
+            this.panel4.Controls.Add(this.cachepct);
+            this.panel4.Controls.Add(this.cnonce);
+            this.panel4.Controls.Add(this.spct);
+            this.panel4.Location = new System.Drawing.Point(95, 39);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(482, 35);
+            this.panel4.TabIndex = 8;
+            // 
+            // cnonces
+            // 
+            this.cnonces.Increment = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.cnonces.Location = new System.Drawing.Point(240, 9);
+            this.cnonces.Maximum = new decimal(new int[] {
+            1000000000,
+            0,
+            0,
+            0});
+            this.cnonces.Name = "cnonces";
+            this.cnonces.Size = new System.Drawing.Size(103, 20);
+            this.cnonces.TabIndex = 11;
+            this.cnonces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.cnonces.ThousandsSeparator = true;
+            this.cnonces.ValueChanged += new System.EventHandler(this.cnonces_ValueChanged);
+            this.cnonces.Enter += new System.EventHandler(this.cnonces_Enter);
+            // 
+            // lbl_SSD3
+            // 
+            this.lbl_SSD3.AutoSize = true;
+            this.lbl_SSD3.Location = new System.Drawing.Point(147, 11);
+            this.lbl_SSD3.Name = "lbl_SSD3";
+            this.lbl_SSD3.Size = new System.Drawing.Size(15, 13);
+            this.lbl_SSD3.TabIndex = 8;
+            this.lbl_SSD3.Text = "%";
+            // 
+            // cachepct
+            // 
+            this.cachepct.Location = new System.Drawing.Point(77, 9);
+            this.cachepct.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.cachepct.Name = "cachepct";
+            this.cachepct.Size = new System.Drawing.Size(64, 20);
+            this.cachepct.TabIndex = 7;
+            this.cachepct.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.cachepct.Value = new decimal(new int[] {
+            80,
+            0,
+            0,
+            0});
+            this.cachepct.ValueChanged += new System.EventHandler(this.cachepct_ValueChanged);
+            this.cachepct.Enter += new System.EventHandler(this.cachepct_Enter);
+            // 
+            // cnonce
+            // 
+            this.cnonce.AutoSize = true;
+            this.cnonce.Location = new System.Drawing.Point(172, 9);
+            this.cnonce.Name = "cnonce";
+            this.cnonce.Size = new System.Drawing.Size(62, 17);
+            this.cnonce.TabIndex = 1;
+            this.cnonce.Text = "Nonces";
+            this.cnonce.UseVisualStyleBackColor = true;
+            // 
+            // spct
+            // 
+            this.spct.AutoSize = true;
+            this.spct.Checked = true;
+            this.spct.Location = new System.Drawing.Point(9, 9);
+            this.spct.Name = "spct";
+            this.spct.Size = new System.Drawing.Size(62, 17);
+            this.spct.TabIndex = 0;
+            this.spct.TabStop = true;
+            this.spct.Text = "Percent";
+            this.spct.UseVisualStyleBackColor = true;
+            this.spct.CheckedChanged += new System.EventHandler(this.spct_CheckedChanged);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.files);
+            this.groupBox3.Controls.Add(this.panel5);
             this.groupBox3.Controls.Add(this.plotsize);
             this.groupBox3.Controls.Add(this.snonce);
             this.groupBox3.Controls.Add(this.offset);
@@ -379,9 +436,9 @@
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Location = new System.Drawing.Point(13, 204);
+            this.groupBox3.Location = new System.Drawing.Point(13, 231);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(596, 199);
+            this.groupBox3.Size = new System.Drawing.Size(596, 238);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Plot File Settings";
@@ -389,16 +446,48 @@
             // files
             // 
             this.files.AutoSize = true;
-            this.files.Location = new System.Drawing.Point(466, 168);
+            this.files.Location = new System.Drawing.Point(101, 214);
             this.files.Name = "files";
             this.files.Size = new System.Drawing.Size(55, 13);
             this.files.TabIndex = 19;
             this.files.Text = "(available)";
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.modeB);
+            this.panel5.Controls.Add(this.modeA);
+            this.panel5.Location = new System.Drawing.Point(87, 161);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(110, 56);
+            this.panel5.TabIndex = 63;
+            // 
+            // modeB
+            // 
+            this.modeB.AutoSize = true;
+            this.modeB.Location = new System.Drawing.Point(17, 26);
+            this.modeB.Name = "modeB";
+            this.modeB.Size = new System.Drawing.Size(91, 17);
+            this.modeB.TabIndex = 1;
+            this.modeB.Text = "Move&&Merge:";
+            this.modeB.UseVisualStyleBackColor = true;
+            // 
+            // modeA
+            // 
+            this.modeA.AutoSize = true;
+            this.modeA.Checked = true;
+            this.modeA.Location = new System.Drawing.Point(17, 3);
+            this.modeA.Name = "modeA";
+            this.modeA.Size = new System.Drawing.Size(74, 17);
+            this.modeA.TabIndex = 0;
+            this.modeA.TabStop = true;
+            this.modeA.Text = "Just Move";
+            this.modeA.UseVisualStyleBackColor = true;
+            this.modeA.CheckedChanged += new System.EventHandler(this.modeA_CheckedChanged);
+            // 
             // plotsize
             // 
             this.plotsize.AutoSize = true;
-            this.plotsize.Location = new System.Drawing.Point(466, 145);
+            this.plotsize.Location = new System.Drawing.Point(402, 141);
             this.plotsize.Name = "plotsize";
             this.plotsize.Size = new System.Drawing.Size(55, 13);
             this.plotsize.TabIndex = 18;
@@ -451,15 +540,15 @@
             this.panel3.Controls.Add(this.npf);
             this.panel3.Controls.Add(this.moreFiles);
             this.panel3.Controls.Add(this.oneFile);
-            this.panel3.Location = new System.Drawing.Point(99, 164);
+            this.panel3.Location = new System.Drawing.Point(201, 184);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(347, 27);
+            this.panel3.Size = new System.Drawing.Size(347, 30);
             this.panel3.TabIndex = 16;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(303, 6);
+            this.label13.Location = new System.Drawing.Point(303, 5);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(44, 13);
             this.label13.TabIndex = 3;
@@ -472,7 +561,7 @@
             0,
             0,
             0});
-            this.npf.Location = new System.Drawing.Point(198, 2);
+            this.npf.Location = new System.Drawing.Point(194, 3);
             this.npf.Maximum = new decimal(new int[] {
             1000000000,
             0,
@@ -490,38 +579,40 @@
             // 
             this.moreFiles.AutoSize = true;
             this.moreFiles.Checked = true;
-            this.moreFiles.Location = new System.Drawing.Point(97, 2);
+            this.moreFiles.Location = new System.Drawing.Point(90, 3);
             this.moreFiles.Name = "moreFiles";
             this.moreFiles.Size = new System.Drawing.Size(99, 17);
             this.moreFiles.TabIndex = 1;
             this.moreFiles.TabStop = true;
             this.moreFiles.Text = "Nonces per File";
             this.moreFiles.UseVisualStyleBackColor = true;
+            this.moreFiles.Enter += new System.EventHandler(this.moreFiles_Enter);
             // 
             // oneFile
             // 
             this.oneFile.AutoSize = true;
-            this.oneFile.Location = new System.Drawing.Point(5, 2);
+            this.oneFile.Location = new System.Drawing.Point(3, 3);
             this.oneFile.Name = "oneFile";
             this.oneFile.Size = new System.Drawing.Size(64, 17);
             this.oneFile.TabIndex = 0;
             this.oneFile.Text = "One File";
             this.oneFile.UseVisualStyleBackColor = true;
             this.oneFile.CheckedChanged += new System.EventHandler(this.oneFile_CheckedChanged);
+            this.oneFile.Enter += new System.EventHandler(this.oneFile_Enter);
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.ntpValue);
             this.panel2.Controls.Add(this.ntpmax);
-            this.panel2.Location = new System.Drawing.Point(104, 141);
+            this.panel2.Location = new System.Drawing.Point(87, 135);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(149, 22);
+            this.panel2.Size = new System.Drawing.Size(149, 23);
             this.panel2.TabIndex = 12;
             // 
             // ntpValue
             // 
             this.ntpValue.AutoSize = true;
-            this.ntpValue.Location = new System.Drawing.Point(92, 0);
+            this.ntpValue.Location = new System.Drawing.Point(92, 4);
             this.ntpValue.Name = "ntpValue";
             this.ntpValue.Size = new System.Drawing.Size(52, 17);
             this.ntpValue.TabIndex = 1;
@@ -532,7 +623,7 @@
             // 
             this.ntpmax.AutoSize = true;
             this.ntpmax.Checked = true;
-            this.ntpmax.Location = new System.Drawing.Point(0, 0);
+            this.ntpmax.Location = new System.Drawing.Point(17, 3);
             this.ntpmax.Name = "ntpmax";
             this.ntpmax.Size = new System.Drawing.Size(69, 17);
             this.ntpmax.TabIndex = 0;
@@ -576,7 +667,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(402, 145);
+            this.label12.Location = new System.Drawing.Point(346, 141);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 13);
             this.label12.TabIndex = 14;
@@ -615,9 +706,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(8, 168);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 13);
+            this.label10.Size = new System.Drawing.Size(70, 13);
             this.label10.TabIndex = 15;
-            this.label10.Text = "Files to Plot";
+            this.label10.Text = "Move&&Merge";
             // 
             // ntp
             // 
@@ -626,7 +717,7 @@
             0,
             0,
             0});
-            this.ntp.Location = new System.Drawing.Point(297, 143);
+            this.ntp.Location = new System.Drawing.Point(237, 138);
             this.ntp.Maximum = new decimal(new int[] {
             1000000000,
             0,
@@ -660,7 +751,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(8, 145);
+            this.label8.Location = new System.Drawing.Point(8, 141);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(76, 13);
             this.label8.TabIndex = 12;
@@ -721,9 +812,9 @@
             this.groupBox4.Controls.Add(this.textBox1);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Location = new System.Drawing.Point(13, 445);
+            this.groupBox4.Location = new System.Drawing.Point(12, 511);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(596, 232);
+            this.groupBox4.Size = new System.Drawing.Size(596, 197);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Status";
@@ -750,7 +841,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(286, 152);
+            this.textBox2.Size = new System.Drawing.Size(286, 118);
             this.textBox2.TabIndex = 3;
             // 
             // textBox1
@@ -761,14 +852,14 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(285, 152);
+            this.textBox1.Size = new System.Drawing.Size(285, 118);
             this.textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(408, 409);
+            this.button1.Location = new System.Drawing.Point(456, 475);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(201, 30);
+            this.button1.Size = new System.Drawing.Size(153, 30);
             this.button1.TabIndex = 4;
             this.button1.Text = "Start Plotting!";
             this.button1.UseVisualStyleBackColor = true;
@@ -776,7 +867,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 684);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 711);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(621, 22);
             this.statusStrip1.TabIndex = 60;
@@ -785,19 +876,30 @@
             // shuffle
             // 
             this.shuffle.AutoSize = true;
-            this.shuffle.Location = new System.Drawing.Point(24, 417);
+            this.shuffle.Enabled = false;
+            this.shuffle.Location = new System.Drawing.Point(19, 483);
             this.shuffle.Name = "shuffle";
-            this.shuffle.Size = new System.Drawing.Size(82, 17);
-            this.shuffle.TabIndex = 61;
-            this.shuffle.Text = "Poc1>Poc2";
+            this.shuffle.Size = new System.Drawing.Size(223, 17);
+            this.shuffle.TabIndex = 63;
+            this.shuffle.Text = "Convert Poc1-->Poc2 when Move&&Merge";
             this.shuffle.UseVisualStyleBackColor = true;
-            this.shuffle.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(297, 475);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(153, 30);
+            this.button2.TabIndex = 64;
+            this.button2.Text = "Preview Plotting";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 706);
+            this.ClientSize = new System.Drawing.Size(621, 733);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.shuffle);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button1);
@@ -809,7 +911,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Johnny\'s XPlotterGui+";
+            this.Text = "Johnny\'s XPlotterGui+ v.1.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grp_xPlotter.ResumeLayout(false);
             this.grp_xPlotter.PerformLayout();
@@ -817,9 +919,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.threads)).EndInit();
             this.grp_SSD.ResumeLayout(false);
             this.grp_SSD.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cnonces)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cachepct)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snonce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.offset)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -857,11 +964,8 @@
         private System.Windows.Forms.TextBox xPlotter;
         private System.Windows.Forms.GroupBox grp_SSD;
         private System.Windows.Forms.Button btn_SSD;
-        private System.Windows.Forms.Label lbl_SSD2;
         private System.Windows.Forms.Label space;
         private System.Windows.Forms.Label spaceLabel;
-        private System.Windows.Forms.Label lbl_SSD3;
-        private System.Windows.Forms.NumericUpDown cachepct;
         private System.Windows.Forms.TextBox ssdCache;
         private System.Windows.Forms.Label lbl_SSD1;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -900,7 +1004,17 @@
         private System.Windows.Forms.NumericUpDown snonce;
         private System.Windows.Forms.Label files;
         private System.Windows.Forms.Label plotsize;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.NumericUpDown cnonces;
+        private System.Windows.Forms.Label lbl_SSD3;
+        private System.Windows.Forms.NumericUpDown cachepct;
+        private System.Windows.Forms.RadioButton cnonce;
+        private System.Windows.Forms.RadioButton spct;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.RadioButton modeB;
+        private System.Windows.Forms.RadioButton modeA;
         private System.Windows.Forms.CheckBox shuffle;
+        private System.Windows.Forms.Button button2;
     }
 }
 

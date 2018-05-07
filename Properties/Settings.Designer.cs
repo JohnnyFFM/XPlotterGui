@@ -214,5 +214,41 @@ namespace XplotterGui.Properties {
                 this["shuffle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool pct {
+            get {
+                return ((bool)(this["pct"]));
+            }
+            set {
+                this["pct"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public decimal cnonces {
+            get {
+                return ((decimal)(this["cnonces"]));
+            }
+            set {
+                this["cnonces"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool modea {
+            get {
+                return ((bool)(this["modea"]));
+            }
+            set {
+                this["modea"] = value;
+            }
+        }
     }
 }
