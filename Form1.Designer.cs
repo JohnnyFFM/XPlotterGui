@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_S1 = new System.Windows.Forms.Label();
+            this.lbl_S2 = new System.Windows.Forms.Label();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.grp_xPlotter = new System.Windows.Forms.GroupBox();
@@ -51,7 +51,7 @@
             this.spaceLabel = new System.Windows.Forms.Label();
             this.ssdCache = new System.Windows.Forms.TextBox();
             this.lbl_SSD1 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnl_Usage = new System.Windows.Forms.Panel();
             this.cnonces = new System.Windows.Forms.NumericUpDown();
             this.lbl_SSD3 = new System.Windows.Forms.Label();
             this.cachepct = new System.Windows.Forms.NumericUpDown();
@@ -59,21 +59,21 @@
             this.spct = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.files = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnl_Transfer = new System.Windows.Forms.Panel();
             this.modeB = new System.Windows.Forms.RadioButton();
             this.modeA = new System.Windows.Forms.RadioButton();
             this.plotsize = new System.Windows.Forms.Label();
             this.snonce = new System.Windows.Forms.NumericUpDown();
             this.offset = new System.Windows.Forms.NumericUpDown();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnl_NPF = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.npf = new System.Windows.Forms.NumericUpDown();
             this.moreFiles = new System.Windows.Forms.RadioButton();
             this.oneFile = new System.Windows.Forms.RadioButton();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnl_NTP = new System.Windows.Forms.Panel();
             this.ntpValue = new System.Windows.Forms.RadioButton();
             this.ntpmax = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnl_SN = new System.Windows.Forms.Panel();
             this.manualsn = new System.Windows.Forms.RadioButton();
             this.automaticsn = new System.Windows.Forms.RadioButton();
             this.label12 = new System.Windows.Forms.Label();
@@ -89,52 +89,52 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.grp_Status = new System.Windows.Forms.GroupBox();
+            this.transferStatus1 = new System.Windows.Forms.TextBox();
+            this.plotStatus1 = new System.Windows.Forms.TextBox();
+            this.transferStatus2 = new System.Windows.Forms.TextBox();
+            this.plotStatus2 = new System.Windows.Forms.TextBox();
+            this.btn_start = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.shuffle = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_preview = new System.Windows.Forms.Button();
             this.grp_xPlotter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threads)).BeginInit();
             this.grp_SSD.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.pnl_Usage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cnonces)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cachepct)).BeginInit();
             this.groupBox3.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.pnl_Transfer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snonce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.offset)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.pnl_NPF.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npf)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnl_NTP.SuspendLayout();
+            this.pnl_SN.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ntp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drive)).BeginInit();
-            this.groupBox4.SuspendLayout();
+            this.grp_Status.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // lbl_S1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Plotter Task";
+            this.lbl_S1.AutoSize = true;
+            this.lbl_S1.Location = new System.Drawing.Point(6, 23);
+            this.lbl_S1.Name = "lbl_S1";
+            this.lbl_S1.Size = new System.Drawing.Size(64, 13);
+            this.lbl_S1.TabIndex = 0;
+            this.lbl_S1.Text = "Plotter Task";
             // 
-            // label2
+            // lbl_S2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(301, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Transfer Task";
+            this.lbl_S2.AutoSize = true;
+            this.lbl_S2.Location = new System.Drawing.Point(301, 23);
+            this.lbl_S2.Name = "lbl_S2";
+            this.lbl_S2.Size = new System.Drawing.Size(73, 13);
+            this.lbl_S2.TabIndex = 2;
+            this.lbl_S2.Text = "Transfer Task";
             // 
             // openFileDialog
             // 
@@ -213,7 +213,7 @@
             0,
             0,
             0});
-            this.threads.ValueChanged += new System.EventHandler(this.numericUpDown7_ValueChanged);
+            this.threads.ValueChanged += new System.EventHandler(this.threads_ValueChanged);
             // 
             // lbl_CPU
             // 
@@ -232,7 +232,7 @@
             this.btn_xPlotter.TabIndex = 2;
             this.btn_xPlotter.Text = "Browse";
             this.btn_xPlotter.UseVisualStyleBackColor = true;
-            this.btn_xPlotter.Click += new System.EventHandler(this.button2_Click);
+            this.btn_xPlotter.Click += new System.EventHandler(this.btn_Xplotter_Click);
             // 
             // numericID
             // 
@@ -240,7 +240,7 @@
             this.numericID.Name = "numericID";
             this.numericID.Size = new System.Drawing.Size(295, 20);
             this.numericID.TabIndex = 4;
-            this.numericID.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.numericID.TextChanged += new System.EventHandler(this.numericID_TextChanged);
             // 
             // lbl_ID
             // 
@@ -275,7 +275,7 @@
             this.grp_SSD.Controls.Add(this.spaceLabel);
             this.grp_SSD.Controls.Add(this.ssdCache);
             this.grp_SSD.Controls.Add(this.lbl_SSD1);
-            this.grp_SSD.Controls.Add(this.panel4);
+            this.grp_SSD.Controls.Add(this.pnl_Usage);
             this.grp_SSD.Location = new System.Drawing.Point(13, 123);
             this.grp_SSD.Name = "grp_SSD";
             this.grp_SSD.Size = new System.Drawing.Size(596, 102);
@@ -328,17 +328,17 @@
             this.lbl_SSD1.TabIndex = 0;
             this.lbl_SSD1.Text = "Location";
             // 
-            // panel4
+            // pnl_Usage
             // 
-            this.panel4.Controls.Add(this.cnonces);
-            this.panel4.Controls.Add(this.lbl_SSD3);
-            this.panel4.Controls.Add(this.cachepct);
-            this.panel4.Controls.Add(this.cnonce);
-            this.panel4.Controls.Add(this.spct);
-            this.panel4.Location = new System.Drawing.Point(95, 39);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(482, 35);
-            this.panel4.TabIndex = 8;
+            this.pnl_Usage.Controls.Add(this.cnonces);
+            this.pnl_Usage.Controls.Add(this.lbl_SSD3);
+            this.pnl_Usage.Controls.Add(this.cachepct);
+            this.pnl_Usage.Controls.Add(this.cnonce);
+            this.pnl_Usage.Controls.Add(this.spct);
+            this.pnl_Usage.Location = new System.Drawing.Point(95, 39);
+            this.pnl_Usage.Name = "pnl_Usage";
+            this.pnl_Usage.Size = new System.Drawing.Size(482, 35);
+            this.pnl_Usage.TabIndex = 8;
             // 
             // cnonces
             // 
@@ -416,13 +416,13 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.files);
-            this.groupBox3.Controls.Add(this.panel5);
+            this.groupBox3.Controls.Add(this.pnl_Transfer);
             this.groupBox3.Controls.Add(this.plotsize);
             this.groupBox3.Controls.Add(this.snonce);
             this.groupBox3.Controls.Add(this.offset);
-            this.groupBox3.Controls.Add(this.panel3);
-            this.groupBox3.Controls.Add(this.panel2);
-            this.groupBox3.Controls.Add(this.panel1);
+            this.groupBox3.Controls.Add(this.pnl_NPF);
+            this.groupBox3.Controls.Add(this.pnl_NTP);
+            this.groupBox3.Controls.Add(this.pnl_SN);
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.btn_Target);
             this.groupBox3.Controls.Add(this.space2);
@@ -452,14 +452,14 @@
             this.files.TabIndex = 19;
             this.files.Text = "(available)";
             // 
-            // panel5
+            // pnl_Transfer
             // 
-            this.panel5.Controls.Add(this.modeB);
-            this.panel5.Controls.Add(this.modeA);
-            this.panel5.Location = new System.Drawing.Point(87, 161);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(110, 56);
-            this.panel5.TabIndex = 63;
+            this.pnl_Transfer.Controls.Add(this.modeB);
+            this.pnl_Transfer.Controls.Add(this.modeA);
+            this.pnl_Transfer.Location = new System.Drawing.Point(87, 161);
+            this.pnl_Transfer.Name = "pnl_Transfer";
+            this.pnl_Transfer.Size = new System.Drawing.Size(110, 56);
+            this.pnl_Transfer.TabIndex = 63;
             // 
             // modeB
             // 
@@ -534,16 +534,16 @@
             this.offset.ValueChanged += new System.EventHandler(this.offset_ValueChanged);
             this.offset.Enter += new System.EventHandler(this.offset_Enter);
             // 
-            // panel3
+            // pnl_NPF
             // 
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Controls.Add(this.npf);
-            this.panel3.Controls.Add(this.moreFiles);
-            this.panel3.Controls.Add(this.oneFile);
-            this.panel3.Location = new System.Drawing.Point(201, 184);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(347, 30);
-            this.panel3.TabIndex = 16;
+            this.pnl_NPF.Controls.Add(this.label13);
+            this.pnl_NPF.Controls.Add(this.npf);
+            this.pnl_NPF.Controls.Add(this.moreFiles);
+            this.pnl_NPF.Controls.Add(this.oneFile);
+            this.pnl_NPF.Location = new System.Drawing.Point(201, 184);
+            this.pnl_NPF.Name = "pnl_NPF";
+            this.pnl_NPF.Size = new System.Drawing.Size(347, 30);
+            this.pnl_NPF.TabIndex = 16;
             // 
             // label13
             // 
@@ -600,14 +600,14 @@
             this.oneFile.CheckedChanged += new System.EventHandler(this.oneFile_CheckedChanged);
             this.oneFile.Enter += new System.EventHandler(this.oneFile_Enter);
             // 
-            // panel2
+            // pnl_NTP
             // 
-            this.panel2.Controls.Add(this.ntpValue);
-            this.panel2.Controls.Add(this.ntpmax);
-            this.panel2.Location = new System.Drawing.Point(87, 135);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(149, 23);
-            this.panel2.TabIndex = 12;
+            this.pnl_NTP.Controls.Add(this.ntpValue);
+            this.pnl_NTP.Controls.Add(this.ntpmax);
+            this.pnl_NTP.Location = new System.Drawing.Point(87, 135);
+            this.pnl_NTP.Name = "pnl_NTP";
+            this.pnl_NTP.Size = new System.Drawing.Size(149, 23);
+            this.pnl_NTP.TabIndex = 12;
             // 
             // ntpValue
             // 
@@ -632,14 +632,14 @@
             this.ntpmax.UseVisualStyleBackColor = true;
             this.ntpmax.CheckedChanged += new System.EventHandler(this.ntpmax_CheckedChanged);
             // 
-            // panel1
+            // pnl_SN
             // 
-            this.panel1.Controls.Add(this.manualsn);
-            this.panel1.Controls.Add(this.automaticsn);
-            this.panel1.Location = new System.Drawing.Point(87, 74);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(104, 53);
-            this.panel1.TabIndex = 6;
+            this.pnl_SN.Controls.Add(this.manualsn);
+            this.pnl_SN.Controls.Add(this.automaticsn);
+            this.pnl_SN.Location = new System.Drawing.Point(87, 74);
+            this.pnl_SN.Name = "pnl_SN";
+            this.pnl_SN.Size = new System.Drawing.Size(104, 53);
+            this.pnl_SN.TabIndex = 6;
             // 
             // manualsn
             // 
@@ -774,7 +774,7 @@
             0,
             0,
             0});
-            this.drive.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.drive.ValueChanged += new System.EventHandler(this.drive_ValueChanged);
             this.drive.Enter += new System.EventHandler(this.drive_Enter);
             // 
             // label7
@@ -804,66 +804,66 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Start Nonce";
             // 
-            // groupBox4
+            // grp_Status
             // 
-            this.groupBox4.Controls.Add(this.textBox4);
-            this.groupBox4.Controls.Add(this.textBox3);
-            this.groupBox4.Controls.Add(this.textBox2);
-            this.groupBox4.Controls.Add(this.textBox1);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Location = new System.Drawing.Point(12, 511);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(596, 197);
-            this.groupBox4.TabIndex = 5;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Status";
+            this.grp_Status.Controls.Add(this.transferStatus1);
+            this.grp_Status.Controls.Add(this.plotStatus1);
+            this.grp_Status.Controls.Add(this.transferStatus2);
+            this.grp_Status.Controls.Add(this.plotStatus2);
+            this.grp_Status.Controls.Add(this.lbl_S2);
+            this.grp_Status.Controls.Add(this.lbl_S1);
+            this.grp_Status.Location = new System.Drawing.Point(12, 511);
+            this.grp_Status.Name = "grp_Status";
+            this.grp_Status.Size = new System.Drawing.Size(596, 197);
+            this.grp_Status.TabIndex = 5;
+            this.grp_Status.TabStop = false;
+            this.grp_Status.Text = "Status";
             // 
-            // textBox4
+            // transferStatus1
             // 
-            this.textBox4.Location = new System.Drawing.Point(304, 43);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(286, 20);
-            this.textBox4.TabIndex = 5;
+            this.transferStatus1.Location = new System.Drawing.Point(304, 43);
+            this.transferStatus1.Name = "transferStatus1";
+            this.transferStatus1.Size = new System.Drawing.Size(286, 20);
+            this.transferStatus1.TabIndex = 5;
             // 
-            // textBox3
+            // plotStatus1
             // 
-            this.textBox3.Location = new System.Drawing.Point(6, 43);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(285, 20);
-            this.textBox3.TabIndex = 4;
+            this.plotStatus1.Location = new System.Drawing.Point(6, 43);
+            this.plotStatus1.Name = "plotStatus1";
+            this.plotStatus1.Size = new System.Drawing.Size(285, 20);
+            this.plotStatus1.TabIndex = 4;
             // 
-            // textBox2
+            // transferStatus2
             // 
-            this.textBox2.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(304, 69);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(286, 118);
-            this.textBox2.TabIndex = 3;
+            this.transferStatus2.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transferStatus2.Location = new System.Drawing.Point(304, 69);
+            this.transferStatus2.Multiline = true;
+            this.transferStatus2.Name = "transferStatus2";
+            this.transferStatus2.ReadOnly = true;
+            this.transferStatus2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.transferStatus2.Size = new System.Drawing.Size(286, 118);
+            this.transferStatus2.TabIndex = 3;
             // 
-            // textBox1
+            // plotStatus2
             // 
-            this.textBox1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(6, 69);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(285, 118);
-            this.textBox1.TabIndex = 1;
+            this.plotStatus2.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plotStatus2.Location = new System.Drawing.Point(6, 69);
+            this.plotStatus2.Multiline = true;
+            this.plotStatus2.Name = "plotStatus2";
+            this.plotStatus2.ReadOnly = true;
+            this.plotStatus2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.plotStatus2.Size = new System.Drawing.Size(285, 118);
+            this.plotStatus2.TabIndex = 1;
             // 
-            // button1
+            // btn_start
             // 
-            this.button1.Location = new System.Drawing.Point(456, 475);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 30);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Start Plotting!";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.start_Click);
+            this.btn_start.Location = new System.Drawing.Point(456, 475);
+            this.btn_start.Name = "btn_start";
+            this.btn_start.Size = new System.Drawing.Size(153, 30);
+            this.btn_start.TabIndex = 4;
+            this.btn_start.Text = "Start Plotting!";
+            this.btn_start.UseVisualStyleBackColor = true;
+            this.btn_start.Click += new System.EventHandler(this.start_Click);
             // 
             // statusStrip1
             // 
@@ -871,7 +871,7 @@
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(621, 22);
             this.statusStrip1.TabIndex = 60;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip1.Text = "statusStrip";
             // 
             // shuffle
             // 
@@ -884,26 +884,26 @@
             this.shuffle.Text = "Convert Poc1-->Poc2 when Move&&Merge";
             this.shuffle.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_preview
             // 
-            this.button2.Location = new System.Drawing.Point(297, 475);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(153, 30);
-            this.button2.TabIndex = 64;
-            this.button2.Text = "Preview Plotting";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.btn_preview.Location = new System.Drawing.Point(297, 475);
+            this.btn_preview.Name = "btn_preview";
+            this.btn_preview.Size = new System.Drawing.Size(153, 30);
+            this.btn_preview.TabIndex = 64;
+            this.btn_preview.Text = "Preview Plotting";
+            this.btn_preview.UseVisualStyleBackColor = true;
+            this.btn_preview.Click += new System.EventHandler(this.btn_Preview_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 733);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_preview);
             this.Controls.Add(this.shuffle);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.btn_start);
+            this.Controls.Add(this.grp_Status);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.grp_SSD);
             this.Controls.Add(this.grp_xPlotter);
@@ -919,35 +919,35 @@
             ((System.ComponentModel.ISupportInitialize)(this.threads)).EndInit();
             this.grp_SSD.ResumeLayout(false);
             this.grp_SSD.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.pnl_Usage.ResumeLayout(false);
+            this.pnl_Usage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cnonces)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cachepct)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.pnl_Transfer.ResumeLayout(false);
+            this.pnl_Transfer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.snonce)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.offset)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.pnl_NPF.ResumeLayout(false);
+            this.pnl_NPF.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.npf)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnl_NTP.ResumeLayout(false);
+            this.pnl_NTP.PerformLayout();
+            this.pnl_SN.ResumeLayout(false);
+            this.pnl_SN.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ntp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.drive)).EndInit();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.grp_Status.ResumeLayout(false);
+            this.grp_Status.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_S1;
+        private System.Windows.Forms.Label lbl_S2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.GroupBox grp_xPlotter;
@@ -989,32 +989,32 @@
         private System.Windows.Forms.RadioButton automaticsn;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox grp_Status;
+        private System.Windows.Forms.TextBox transferStatus2;
+        private System.Windows.Forms.TextBox plotStatus2;
+        private System.Windows.Forms.Button btn_start;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnl_NPF;
+        private System.Windows.Forms.Panel pnl_NTP;
+        private System.Windows.Forms.Panel pnl_SN;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown offset;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox transferStatus1;
+        private System.Windows.Forms.TextBox plotStatus1;
         private System.Windows.Forms.NumericUpDown snonce;
         private System.Windows.Forms.Label files;
         private System.Windows.Forms.Label plotsize;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnl_Usage;
         private System.Windows.Forms.NumericUpDown cnonces;
         private System.Windows.Forms.Label lbl_SSD3;
         private System.Windows.Forms.NumericUpDown cachepct;
         private System.Windows.Forms.RadioButton cnonce;
         private System.Windows.Forms.RadioButton spct;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnl_Transfer;
         private System.Windows.Forms.RadioButton modeB;
         private System.Windows.Forms.RadioButton modeA;
         private System.Windows.Forms.CheckBox shuffle;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_preview;
     }
 }
 

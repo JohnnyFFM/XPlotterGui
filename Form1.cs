@@ -18,9 +18,12 @@ namespace XplotterGui
             InitializeComponent();
         }
 
+        //task List
+        private List<Task> tasklist;
+        //task Counter
         private int x1;
         private int x2;
-        private List<Task> tasklist;
+        //task Notifier
         AutoResetEvent[] autoEvents;
 
         public struct Task
@@ -31,7 +34,7 @@ namespace XplotterGui
             public int len;
         }
 
-        //Plotter Thread
+        //thread error handling
         static void p_ErrorDataReceived(object sender, DataReceivedEventArgs e)
         {
             Process p = sender as Process;
@@ -40,69 +43,76 @@ namespace XplotterGui
             Console.WriteLine(e.Data);
         }
 
+        //display plotter task status
         void task1Status(string text)
         {
-            if (textBox3.InvokeRequired){
-                textBox3.Invoke(new MethodInvoker(() => { task1Status(text); }));
+            if (plotStatus1.InvokeRequired){
+                plotStatus1.Invoke(new MethodInvoker(() => { task1Status(text); }));
                 return;
             }
             else
             {
-                textBox3.Text = text;
+                plotStatus1.Text = text;
             }
             
         }
+
+        //display transfer task status
         void task2Status(string text)
         {
-            if (textBox4.InvokeRequired)
+            if (transferStatus1.InvokeRequired)
             {
-                textBox4.Invoke(new MethodInvoker(() => { task2Status(text); }));
+                transferStatus1.Invoke(new MethodInvoker(() => { task2Status(text); }));
                 return;
             } else {
-                textBox4.Text = text;
+                transferStatus1.Text = text;
             }
         }
 
+        //display plotter output
         void p_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
             Process p = sender as Process;
             if (p == null)
                 return;
-            if (textBox1.InvokeRequired)
+            if (plotStatus2.InvokeRequired)
             {
-                textBox1.Invoke(new MethodInvoker(() => { p_OutputDataReceived(sender, e); }));
+                plotStatus2.Invoke(new MethodInvoker(() => { p_OutputDataReceived(sender, e); }));
                 return;
             }
             else
             {
                 if (e.Data != null)
                 {
-                    if (textBox1.Lines.Length > 50) textBox1.Text = "";
-                    textBox1.AppendText(e.Data+ "\r\n");
+                    if (plotStatus2.Lines.Length > 50) plotStatus2.Text = "";
+                    plotStatus2.AppendText(e.Data+ "\r\n");
                 }
             }
         }
+
+        //display transfer ourput
         void p_OutputDataReceived2(object sender, DataReceivedEventArgs e)
         {
             Process p = sender as Process;
             if (p == null)
                 return;
-            if (textBox2.InvokeRequired)
+            if (transferStatus2.InvokeRequired)
             {
-                textBox2.Invoke(new MethodInvoker(() => { p_OutputDataReceived2(sender, e); }));
+                transferStatus2.Invoke(new MethodInvoker(() => { p_OutputDataReceived2(sender, e); }));
                 return;
             }
             else
             {
                 if (e.Data != null)
                 {
-                    if (textBox2.Lines.Length > 50) textBox2.Text = "";
-                    textBox2.AppendText(e.Data + "\n");
+                    if (transferStatus2.Lines.Length > 50) transferStatus2.Text = "";
+                    transferStatus2.AppendText(e.Data + "\n");
                 }
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        //locate xplotter executable
+        private void btn_Xplotter_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -112,6 +122,7 @@ namespace XplotterGui
             }
         }
 
+        //locate SSD cache
         private void updateSSD_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
@@ -124,6 +135,33 @@ namespace XplotterGui
             }
         }
 
+        //update plot size label
+        private void displayPlotSize()
+        {
+
+            plotsize.Text = "Total size: " + prettyBytes((long)ntp.Value * (2 << 17));
+            if (oneFile.Checked)
+            {
+                files.Text = "1 file(s)";
+            }
+            else
+            {
+                if (npf.Value > 0)
+                    files.Text = Math.Ceiling((double)ntp.Value / (double)npf.Value).ToString() + " file(s)";
+            }
+
+        }
+
+        //update startnonce 
+        private void updatesn()
+        {
+            if (automaticsn.Checked)
+            {
+                snonce.Value = (drive.Value - 1) * offset.Value;
+            }
+        }
+
+        //update cache info label
         private void UpdateSpace()
         {
             if (Directory.Exists(ssdCache.Text)){
@@ -142,6 +180,8 @@ namespace XplotterGui
                 }
             }
         }
+
+        //update target drive info label
         private void UpdateSpace2()
         {
             if (Directory.Exists(target.Text))
@@ -151,6 +191,21 @@ namespace XplotterGui
                 space2.Text = prettyBytes(a.AvailableFreeSpace) + " (" + (a.AvailableFreeSpace *0.99999 / (2 << 17)).ToString("#,##0") + " Nonces)";
             }
         }
+
+        //update NTP label
+        private void updateNtp()
+        {
+            if (ntpmax.Checked && Directory.Exists(target.Text))
+            {
+                DriveInfo drive = new DriveInfo(target.Text);
+                DriveInfo a = new DriveInfo(drive.Name);
+                ntp.Value = (decimal)((double)(a.AvailableFreeSpace / (2 << 17)) * 0.99999);
+                Properties.Settings.Default.ntpvalue = ntp.Value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        //nicen bytes output
         private string prettyBytes(long bytes)
         {
             string result;
@@ -162,6 +217,7 @@ namespace XplotterGui
             return result;
         }
 
+        //load form and user settings
         private void Form1_Load(object sender, EventArgs e)
         {
             loadSettings();
@@ -170,6 +226,7 @@ namespace XplotterGui
             updatesn();
         }
 
+        //locate plot target directory
         private void button4_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
@@ -182,8 +239,10 @@ namespace XplotterGui
             }
         }
 
+        //load user settings
         private void loadSettings()
         {
+            //TODO: optimize order, disable label updates until load complete
             decimal test = Properties.Settings.Default.cnonces;
             xPlotter.Text = Properties.Settings.Default.xplotter;
             numericID.Text = Properties.Settings.Default.ID;
@@ -199,42 +258,19 @@ namespace XplotterGui
             drive.Value = Properties.Settings.Default.drive;
             offset.Value = Properties.Settings.Default.offset;
             ntpmax.Checked = Properties.Settings.Default.ntp;
-
             shuffle.Checked = Properties.Settings.Default.shuffle;
             cnonce.Checked = !Properties.Settings.Default.pct;
             spct.Checked = Properties.Settings.Default.pct;
             cnonces.Value = test;
             modeA.Checked = Properties.Settings.Default.modea;
             modeB.Checked = !Properties.Settings.Default.modea;
-
             oneFile.Checked = Properties.Settings.Default.ftp;
             moreFiles.Checked = !Properties.Settings.Default.ftp;
             npf.Value = Properties.Settings.Default.ftpvalue;
-
         }
-
-        private void textBox6_TextChanged(object sender, EventArgs e)
+        private void btn_Preview_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.ID = numericID.Text;
-            Properties.Settings.Default.Save();
-        }
-
-        private void numericUpDown7_ValueChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.threads = (int)threads.Value;
-            Properties.Settings.Default.Save();
-        }
-
-        private void ram_ValueChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.ram = (int)ram.Value;
-            Properties.Settings.Default.Save();
-
-        }
-
-        private void start_Click(object sender, EventArgs e)
-        {
-            int cachesize =0;
+            int cachesize = 0;
             //get cache
             if (Directory.Exists(ssdCache.Text))
             {
@@ -243,7 +279,7 @@ namespace XplotterGui
                 if (spct.Checked)
                 {
                     cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8;
-               }
+                }
                 else
                 {
                     cachesize = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
@@ -267,7 +303,65 @@ namespace XplotterGui
                     tasklist.Add(new Task { file = i, fileLength = length, start = i * (int)npf.Value + j * cachesize, len = Math.Min(cachesize, length - j * cachesize) });
                 }
             }
-            
+
+            string output = "";
+            int file = -1;
+            for (int i = 1; i < Math.Min(50, tasklist.Count + 1); i++)
+            {
+                if (file != tasklist[i - 1].file)
+                {
+                    string command;
+                    if (shuffle.Checked)
+                    {
+                        command = target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[i - 1].file).ToString() + "_" + tasklist[i - 1].fileLength.ToString();
+                    }
+                    else
+                    {
+                        command = target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[i - 1].file).ToString() + "_" + tasklist[i - 1].fileLength.ToString() + "_" + tasklist[i - 1].fileLength.ToString();
+                    }
+                    output += command + "\r\n";
+                    file = tasklist[i - 1].file;
+                }
+            }
+            if (tasklist.Count > 49) { output = output + "...\r\n"; }
+            MessageBox.Show(output, "Plot File Preview", MessageBoxButtons.OK);
+        }
+        //start plotting
+        private void start_Click(object sender, EventArgs e)
+        {
+            int cachesize =0;
+            //get cache
+            if (Directory.Exists(ssdCache.Text))
+            {
+                DriveInfo drive = new DriveInfo(ssdCache.Text);
+                DriveInfo a = new DriveInfo(drive.Name);
+                if (spct.Checked)
+                {
+                    cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8;
+               }
+                else
+                {
+                    cachesize = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
+                }
+            }
+            else { return; }
+            x1 = 0;
+            x2 = 0;
+            //prepare tasklist
+            tasklist = new List<Task>();
+            //loop files
+            for (int i = 0; i < (int)Math.Ceiling(((double)ntp.Value / (double)npf.Value)); i++)
+            {
+                //loop chunks                
+                int length = Math.Min((int)npf.Value, -(int)npf.Value * i + (int)ntp.Value);
+
+                for (int j = 0; j < (int)Math.Ceiling(((double)length / (double)cachesize)); j++) //todo replace with cache size in nonces
+                {
+                    //create Task
+                    tasklist.Add(new Task { file = i, fileLength = length, start = i * (int)npf.Value + j * cachesize, len = Math.Min(cachesize, length - j * cachesize) });
+                }
+            }
+            //start control thread
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
@@ -275,7 +369,7 @@ namespace XplotterGui
             }).Start();
         }
 
-        //Controlthread
+        //control thread
         private void Control()
         {
             autoEvents = new AutoResetEvent[]
@@ -332,7 +426,6 @@ namespace XplotterGui
                         p1.Start();
                         p1.BeginOutputReadLine();
                         p1.WaitForExit();
-                         //task1Status("Task done! Waiting for Task 2, i.e. HDD is bottleneck!");
                         x1++;
                         autoEvents[0].Set();
                     }
@@ -347,8 +440,6 @@ namespace XplotterGui
         public void p1_threadExit(object sender, System.EventArgs e)
         {
             task1Status("Task " + (x1 + 1).ToString() + " completed! ! Bottleneck is HDD.");
-           // autoEvents[0].Set();
-            Console.WriteLine("YYYYYYYYYY");
         }
 
         public void p2_threadExit(object sender, System.EventArgs e)
@@ -361,8 +452,6 @@ namespace XplotterGui
             {
                task2Status("Task "+(x2+1).ToString()+" completed! Bottleneck is CPU.");
             }
-          //  autoEvents[1].Set();
-            Console.WriteLine("XXXXXXX");
         }
 
         //Mover Thread
@@ -439,6 +528,8 @@ namespace XplotterGui
             }
         }
 
+
+        //below this line all GUI handling
         private void xPlotter_TextChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.xplotter = xPlotter.Text;
@@ -471,19 +562,28 @@ namespace XplotterGui
                 Properties.Settings.Default.target = target.Text;
                 Properties.Settings.Default.Save();
                 UpdateSpace2();
-                updateNtp();
-            
+                updateNtp();        
         }
 
-        private void updatesn()
-        { 
-            if (automaticsn.Checked)
-            {
-                snonce.Value = (drive.Value-1)* offset.Value;
-            }
+        private void numericID_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ID = numericID.Text;
+            Properties.Settings.Default.Save();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void threads_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.threads = (int)threads.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void ram_ValueChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ram = (int)ram.Value;
+            Properties.Settings.Default.Save();
+        }
+
+        private void drive_ValueChanged(object sender, EventArgs e)
         {
             updatesn();
             Properties.Settings.Default.drive = drive.Value;
@@ -497,25 +597,11 @@ namespace XplotterGui
             Properties.Settings.Default.Save();
         }
 
-        private void updateNtp()
-        {
-            if (ntpmax.Checked && Directory.Exists(target.Text))
-                {
-                DriveInfo drive = new DriveInfo(target.Text);
-                DriveInfo a = new DriveInfo(drive.Name);
-                ntp.Value = (decimal)((double)(a.AvailableFreeSpace / (2 << 17)) * 0.99999);
-                Properties.Settings.Default.ntpvalue = ntp.Value;
-                Properties.Settings.Default.Save();
-            }
-        }
-
         private void ntpmax_CheckedChanged(object sender, EventArgs e)
         {
             updateNtp();
             Properties.Settings.Default.ntp = ntpmax.Checked;
             Properties.Settings.Default.Save();
-            
-
         }
 
         private void offset_ValueChanged(object sender, EventArgs e)
@@ -537,7 +623,6 @@ namespace XplotterGui
             {
                 npf.Value = ntp.Value;
             }
-   
         }
 
         private void oneFile_CheckedChanged(object sender, EventArgs e)
@@ -556,7 +641,6 @@ namespace XplotterGui
 
         }
 
-
         private void ntp_Enter(object sender, EventArgs e)
         {
                 ntpValue.Checked = true;
@@ -570,9 +654,7 @@ namespace XplotterGui
 
         private void snonce_Enter(object sender, EventArgs e)
         {
-
             manualsn.Checked = true;
-
         }
 
         private void drive_Enter(object sender, EventArgs e)
@@ -583,7 +665,6 @@ namespace XplotterGui
         private void offset_Enter(object sender, EventArgs e)
         {
             automaticsn.Checked =true;
-
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -621,24 +702,6 @@ namespace XplotterGui
                 npf.Value = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
             }
             UpdateSpace();
-
-
-        }
-
-        private void displayPlotSize()
-        {
-
-            plotsize.Text = "Total size: " + prettyBytes((long)ntp.Value * (2 << 17));
-            if (oneFile.Checked)
-            {
-                files.Text = "1 file(s)";
-            }
-            else
-            {
-                if (npf.Value > 0)
-                    files.Text = Math.Ceiling((double)ntp.Value / (double)npf.Value).ToString() + " file(s)";
-            }
-
         }
 
         private void modeA_CheckedChanged(object sender, EventArgs e)
@@ -664,65 +727,6 @@ namespace XplotterGui
         private void moreFiles_Enter(object sender, EventArgs e)
         {
             modeB.Checked = true;
-        }
-
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            int cachesize = 0;
-            //get cache
-            if (Directory.Exists(ssdCache.Text))
-            {
-                DriveInfo drive = new DriveInfo(ssdCache.Text);
-                DriveInfo a = new DriveInfo(drive.Name);
-                if (spct.Checked)
-                {
-                    cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8;
-                }
-                else
-                {
-                    cachesize = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
-                }
-            }
-            else { return; }
-            x1 = 0;
-            x2 = 0;
-            //prepare tasklist
-            tasklist = new List<Task>();
-            //loop files
-
-            for (int i = 0; i < (int)Math.Ceiling(((double)ntp.Value / (double)npf.Value)); i++)
-            {
-                //loop chunks                
-                int length = Math.Min((int)npf.Value, -(int)npf.Value * i + (int)ntp.Value);
-
-                for (int j = 0; j < (int)Math.Ceiling(((double)length / (double)cachesize)); j++) //todo replace with cache size in nonces
-                {
-                    //create Task
-                    tasklist.Add(new Task { file = i, fileLength = length, start = i * (int)npf.Value + j * cachesize, len = Math.Min(cachesize, length - j * cachesize) });
-                }
-            }
-
-            string output="";
-            int file = -1;
-            for (int i = 1; i < Math.Min(50,tasklist.Count + 1); i++)
-            {
-                if (file != tasklist[i - 1].file)
-                {
-                    string command;
-                    if (shuffle.Checked)
-                    {
-                        command = target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[i - 1].file).ToString() + "_" + tasklist[i - 1].fileLength.ToString();
-                    }
-                    else
-                    {
-                        command = target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[i - 1].file).ToString() + "_" + tasklist[i-1].fileLength.ToString() + "_" + tasklist[i-1].fileLength.ToString();
-                    }
-                    output += command + "\r\n";
-                    file = tasklist[i - 1].file;
-                }
-            }
-            if (tasklist.Count > 49) { output = output + "...\r\n"; }
-            MessageBox.Show(output, "Plot File Preview", MessageBoxButtons.OK);
         }
     }
 }
