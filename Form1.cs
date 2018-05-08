@@ -547,7 +547,7 @@ namespace XplotterGui
         {
             Properties.Settings.Default.space = cachepct.Value;
             Properties.Settings.Default.Save();
-            if (modeA.Checked)
+            if (modeA.Checked && (Directory.Exists(ssdCache.Text)))
             {
                 moreFiles.Checked = true;
                 DriveInfo drive = new DriveInfo(ssdCache.Text);
