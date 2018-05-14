@@ -267,6 +267,7 @@ namespace XplotterGui
             oneFile.Checked = Properties.Settings.Default.ftp;
             moreFiles.Checked = !Properties.Settings.Default.ftp;
             npf.Value = Properties.Settings.Default.ftpvalue;
+            shuffle.Enabled = modeB.Checked;
         }
         private void btn_Preview_Click(object sender, EventArgs e)
         {
@@ -708,9 +709,11 @@ namespace XplotterGui
         {
             Properties.Settings.Default.modea = modeA.Checked;
             Properties.Settings.Default.Save();
+            
             shuffle.Enabled = modeB.Checked;
             if (modeA.Checked)
             {
+                shuffle.Checked = false;
                 moreFiles.Checked = true;
                 DriveInfo drive = new DriveInfo(ssdCache.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
@@ -727,6 +730,12 @@ namespace XplotterGui
         private void moreFiles_Enter(object sender, EventArgs e)
         {
             modeB.Checked = true;
+        }
+
+        private void shuffle_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.shuffle = shuffle.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }

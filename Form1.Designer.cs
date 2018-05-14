@@ -883,6 +883,7 @@
             this.shuffle.TabIndex = 63;
             this.shuffle.Text = "Convert Poc1-->Poc2 when Move&&Merge";
             this.shuffle.UseVisualStyleBackColor = true;
+            this.shuffle.CheckedChanged += new System.EventHandler(this.shuffle_CheckedChanged);
             // 
             // btn_preview
             // 
