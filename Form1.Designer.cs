@@ -96,7 +96,6 @@
             this.plotStatus2 = new System.Windows.Forms.TextBox();
             this.btn_start = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.shuffle = new System.Windows.Forms.CheckBox();
             this.btn_preview = new System.Windows.Forms.Button();
             this.grp_xPlotter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ram)).BeginInit();
@@ -873,18 +872,6 @@
             this.statusStrip1.TabIndex = 60;
             this.statusStrip1.Text = "statusStrip";
             // 
-            // shuffle
-            // 
-            this.shuffle.AutoSize = true;
-            this.shuffle.Enabled = false;
-            this.shuffle.Location = new System.Drawing.Point(19, 483);
-            this.shuffle.Name = "shuffle";
-            this.shuffle.Size = new System.Drawing.Size(223, 17);
-            this.shuffle.TabIndex = 63;
-            this.shuffle.Text = "Convert Poc1-->Poc2 when Move&&Merge";
-            this.shuffle.UseVisualStyleBackColor = true;
-            this.shuffle.CheckedChanged += new System.EventHandler(this.shuffle_CheckedChanged);
-            // 
             // btn_preview
             // 
             this.btn_preview.Location = new System.Drawing.Point(297, 475);
@@ -901,7 +888,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(621, 733);
             this.Controls.Add(this.btn_preview);
-            this.Controls.Add(this.shuffle);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btn_start);
             this.Controls.Add(this.grp_Status);
@@ -912,7 +898,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Johnny\'s XPlotterGui+ v.1.0";
+            this.Text = "Johnny\'s XPlotterGui+ v.1.4";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grp_xPlotter.ResumeLayout(false);
             this.grp_xPlotter.PerformLayout();
@@ -1014,7 +1000,6 @@
         private System.Windows.Forms.Panel pnl_Transfer;
         private System.Windows.Forms.RadioButton modeB;
         private System.Windows.Forms.RadioButton modeA;
-        private System.Windows.Forms.CheckBox shuffle;
         private System.Windows.Forms.Button btn_preview;
     }
 }

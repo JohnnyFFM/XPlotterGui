@@ -169,13 +169,13 @@ namespace XplotterGui
                 DriveInfo a = new DriveInfo(drive.Name);
                 if (spct.Checked)
                 {
-                    long nbnonce = (a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8;
+                    long nbnonce = (a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) * 64;
                     cnonces.Value = 2*nbnonce;
                     space.Text = "Using 2 files, each " + prettyBytes(nbnonce * (2 << 17)) + " (" + (nbnonce).ToString("#,##0") + " Nonces)" + " out of " + prettyBytes(a.AvailableFreeSpace) + " (" + (a.AvailableFreeSpace / (2 << 17)).ToString("#,##0") + " Nonces)";
                 }
                 else
                 {
-                    long nbnonce = Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18)/8)*8,((long)cnonces.Value / 2 / 8) * 8);
+                    long nbnonce = Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18)/8)*8,((long)cnonces.Value / 2 / 64) * 64);
                     space.Text = "Using 2 files, each " + prettyBytes(nbnonce*(2<<17)) + " (" + (nbnonce).ToString("#,##0") + " Nonces)" + " out of " + prettyBytes(a.AvailableFreeSpace) + " (" + (a.AvailableFreeSpace / (2 << 17)).ToString("#,##0") + " Nonces)";
                 }
             }
@@ -258,7 +258,6 @@ namespace XplotterGui
             drive.Value = Properties.Settings.Default.drive;
             offset.Value = Properties.Settings.Default.offset;
             ntpmax.Checked = Properties.Settings.Default.ntp;
-            shuffle.Checked = Properties.Settings.Default.shuffle;
             cnonce.Checked = !Properties.Settings.Default.pct;
             spct.Checked = Properties.Settings.Default.pct;
             cnonces.Value = test;
@@ -267,7 +266,6 @@ namespace XplotterGui
             oneFile.Checked = Properties.Settings.Default.ftp;
             moreFiles.Checked = !Properties.Settings.Default.ftp;
             npf.Value = Properties.Settings.Default.ftpvalue;
-            shuffle.Enabled = modeB.Checked;
         }
         private void btn_Preview_Click(object sender, EventArgs e)
         {
@@ -279,11 +277,11 @@ namespace XplotterGui
                 DriveInfo a = new DriveInfo(drive.Name);
                 if (spct.Checked)
                 {
-                    cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8;
+                    cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) * 64;
                 }
                 else
                 {
-                    cachesize = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
+                    cachesize = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) * 64, ((long)cnonces.Value / 2 / 64) * 64);
                 }
             }
             else { return; }
@@ -312,14 +310,7 @@ namespace XplotterGui
                 if (file != tasklist[i - 1].file)
                 {
                     string command;
-                    if (shuffle.Checked)
-                    {
-                        command = target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[i - 1].file).ToString() + "_" + tasklist[i - 1].fileLength.ToString();
-                    }
-                    else
-                    {
-                        command = target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[i - 1].file).ToString() + "_" + tasklist[i - 1].fileLength.ToString() + "_" + tasklist[i - 1].fileLength.ToString();
-                    }
+                    command = target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[i - 1].file).ToString() + "_" + tasklist[i - 1].fileLength.ToString();
                     output += command + "\r\n";
                     file = tasklist[i - 1].file;
                 }
@@ -338,11 +329,11 @@ namespace XplotterGui
                 DriveInfo a = new DriveInfo(drive.Name);
                 if (spct.Checked)
                 {
-                    cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8;
+                    cachesize = (int)(a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) * 64;
                }
                 else
                 {
-                    cachesize = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
+                    cachesize = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) * 64, ((long)cnonces.Value / 2 / 64) * 64);
                 }
             }
             else { return; }
@@ -483,14 +474,7 @@ namespace XplotterGui
                         else
                         {
                             command = Application.StartupPath + "\\" + "plotMerge.exe";
-                            if (shuffle.Checked)
-                            {
-                                param = ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " " + target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString();
-                            }
-                            else
-                            {
-                                param = ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " " + target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString() + "_" + tasklist[x2 - 1].fileLength.ToString();
-                            }
+                            param = ssdCache.Text + "\\" + numericID.Text + "_" + (tasklist[x2 - 1].start + snonce.Value).ToString() + "_" + tasklist[x2 - 1].len.ToString() + "_" + tasklist[x2 - 1].len.ToString() + " " + target.Text + "\\" + numericID.Text + "_" + (snonce.Value + npf.Value * tasklist[x2 - 1].file).ToString() + "_" + tasklist[x2 - 1].fileLength.ToString();
                         }
                         //Console.WriteLine(command);
                         p2.StartInfo = new ProcessStartInfo(command, param)
@@ -553,7 +537,7 @@ namespace XplotterGui
                 moreFiles.Checked = true;
                 DriveInfo drive = new DriveInfo(ssdCache.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
-                npf.Value = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
+                npf.Value = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) * 64, ((long)cnonces.Value / 2 / 64) * 64);
             }
             UpdateSpace();
         }
@@ -616,6 +600,7 @@ namespace XplotterGui
         {
             if (!ntpmax.Checked)
             {
+                ntp.Value = (int)ntp.Value / 64 * 64;
                 Properties.Settings.Default.ntpvalue = ntp.Value;
                 Properties.Settings.Default.Save();
             }
@@ -636,6 +621,7 @@ namespace XplotterGui
 
         private void npf_ValueChanged(object sender, EventArgs e)
         {
+            npf.Value = (int)npf.Value / 64 * 64;
             Properties.Settings.Default.ftpvalue = npf.Value;
             Properties.Settings.Default.Save();
             displayPlotSize();
@@ -668,12 +654,6 @@ namespace XplotterGui
             automaticsn.Checked =true;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.shuffle = shuffle.Checked;
-            Properties.Settings.Default.Save();
-        }
-
         private void spct_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.pct = spct.Checked;
@@ -695,12 +675,12 @@ namespace XplotterGui
         {
             Properties.Settings.Default.cnonces = cnonces.Value;
             Properties.Settings.Default.Save();
-            if (modeA.Checked)
+            if (modeA.Checked && ssdCache.Text != "")
             {
                 moreFiles.Checked = true;
                 DriveInfo drive = new DriveInfo(ssdCache.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
-                npf.Value = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
+                npf.Value = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) *64, ((long)cnonces.Value / 2 / 64) * 64);
             }
             UpdateSpace();
         }
@@ -710,14 +690,12 @@ namespace XplotterGui
             Properties.Settings.Default.modea = modeA.Checked;
             Properties.Settings.Default.Save();
             
-            shuffle.Enabled = modeB.Checked;
             if (modeA.Checked)
             {
-                shuffle.Checked = false;
                 moreFiles.Checked = true;
                 DriveInfo drive = new DriveInfo(ssdCache.Text);
                 DriveInfo a = new DriveInfo(drive.Name);
-                npf.Value = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 8) * 8, ((long)cnonces.Value / 2 / 8) * 8);
+                npf.Value = (int)Math.Min((a.AvailableFreeSpace * (long)cachepct.Value / 100 / (2 << 18) / 64) * 64, ((long)cnonces.Value / 2 / 64) * 64);
             }
             displayPlotSize();
         }
@@ -730,12 +708,6 @@ namespace XplotterGui
         private void moreFiles_Enter(object sender, EventArgs e)
         {
             modeB.Checked = true;
-        }
-
-        private void shuffle_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.shuffle = shuffle.Checked;
-            Properties.Settings.Default.Save();
         }
     }
 }

@@ -47,9 +47,6 @@
     <Setting Name="ftpvalue" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">4000000</Value>
     </Setting>
-    <Setting Name="shuffle" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="pct" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
