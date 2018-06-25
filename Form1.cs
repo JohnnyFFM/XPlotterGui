@@ -34,15 +34,6 @@ namespace XplotterGui
             public int len;
         }
 
-        //thread error handling
-        static void p_ErrorDataReceived(object sender, DataReceivedEventArgs e)
-        {
-            Process p = sender as Process;
-            if (p == null)
-                return;
-            Console.WriteLine(e.Data);
-        }
-
         //display plotter task status
         void task1Status(string text)
         {
@@ -110,6 +101,28 @@ namespace XplotterGui
                 }
             }
         }
+
+        //thread error handling
+        void p_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            Process p = sender as Process;
+            if (p == null)
+                return;
+         
+            if (statusStrip1.InvokeRequired)
+            {
+                statusStrip1.Invoke(new MethodInvoker(() => { p_OutputDataReceived2(sender, e); }));
+                return;
+            }
+            else
+            {
+                if (e.Data != null)
+                {
+                    sts_lbl.Text = e.Data;
+                }
+            }
+        }
+
 
         //locate xplotter executable
         private void btn_Xplotter_Click(object sender, EventArgs e)

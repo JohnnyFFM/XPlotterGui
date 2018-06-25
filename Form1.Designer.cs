@@ -97,6 +97,7 @@
             this.btn_start = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.btn_preview = new System.Windows.Forms.Button();
+            this.sts_lbl = new System.Windows.Forms.ToolStripStatusLabel();
             this.grp_xPlotter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ram)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.threads)).BeginInit();
@@ -115,6 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ntp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.drive)).BeginInit();
             this.grp_Status.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl_S1
@@ -866,6 +868,8 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sts_lbl});
             this.statusStrip1.Location = new System.Drawing.Point(0, 711);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(621, 22);
@@ -881,6 +885,11 @@
             this.btn_preview.Text = "Preview Plotting";
             this.btn_preview.UseVisualStyleBackColor = true;
             this.btn_preview.Click += new System.EventHandler(this.btn_Preview_Click);
+            // 
+            // sts_lbl
+            // 
+            this.sts_lbl.Name = "sts_lbl";
+            this.sts_lbl.Size = new System.Drawing.Size(0, 17);
             // 
             // Form1
             // 
@@ -927,6 +936,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.drive)).EndInit();
             this.grp_Status.ResumeLayout(false);
             this.grp_Status.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1001,6 +1012,7 @@
         private System.Windows.Forms.RadioButton modeB;
         private System.Windows.Forms.RadioButton modeA;
         private System.Windows.Forms.Button btn_preview;
+        private System.Windows.Forms.ToolStripStatusLabel sts_lbl;
     }
 }
 
